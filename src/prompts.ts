@@ -9,28 +9,38 @@ export const DEFAULT_PROJECT_TYPE: ProjectType = 'standalone';
 
 export interface PromptOptions {
   defaultName?: string;
+  skipNamePrompt?: boolean;
 }
 
 export async function promptProjectConfig(options: PromptOptions = {}): Promise<ProjectConfig | null> {
-  const { defaultName = DEFAULT_PROJECT_NAME } = options;
+  const { defaultName = DEFAULT_PROJECT_NAME, skipNamePrompt = false } = options;
 
   p.intro('Create a new GAS project');
 
-  const projectName = await p.text({
-    message: 'Project name',
-    placeholder: defaultName,
-    defaultValue: defaultName,
-    validate: (value) => {
-      const result = validateProjectName(value);
-      if (!result.valid) {
-        return result.error;
-      }
-    },
-  });
+  let projectName: string;
 
-  if (p.isCancel(projectName)) {
-    p.cancel('Operation cancelled.');
-    return null;
+  if (skipNamePrompt && defaultName) {
+    // Use the provided name without prompting
+    projectName = defaultName;
+  } else {
+    const result = await p.text({
+      message: 'Project name',
+      placeholder: defaultName,
+      defaultValue: defaultName,
+      validate: (value) => {
+        const validationResult = validateProjectName(value);
+        if (!validationResult.valid) {
+          return validationResult.error;
+        }
+      },
+    });
+
+    if (p.isCancel(result)) {
+      p.cancel('Operation cancelled.');
+      return null;
+    }
+
+    projectName = result as string;
   }
 
   const language = await p.select({

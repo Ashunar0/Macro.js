@@ -121,6 +121,7 @@ async function main(): Promise<void> {
     // Interactive mode
     const result = await promptProjectConfig({
       defaultName: argProjectName,
+      skipNamePrompt: !!argProjectName,
     });
 
     if (!result) {
