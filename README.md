@@ -86,8 +86,8 @@ npm run open
 ## Prerequisites
 
 - Node.js >= 18
-- clasp (`npm install -g @google/clasp`)
-- Logged in to clasp with Google account (`clasp login`)
+- Google account
+- Google Apps Script API enabled (see below)
 
 ## Enabling GAS API
 
