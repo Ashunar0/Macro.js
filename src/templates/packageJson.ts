@@ -31,7 +31,7 @@ export function generatePackageJson(options: PackageJsonOptions): string {
 
   if (language === 'typescript') {
     baseConfig.scripts = {
-      build: 'tsc && cpy src/appsscript.json dist',
+      build: 'tsc && cpy src/appsscript.json dist --flat',
       ...baseConfig.scripts,
       deploy: 'npm run build && npm run push',
     };
@@ -42,7 +42,7 @@ export function generatePackageJson(options: PackageJsonOptions): string {
     };
   } else {
     baseConfig.scripts = {
-      build: "cpy 'src/**/*' dist",
+      build: "cpy 'src/**/*' dist --flat",
       ...baseConfig.scripts,
       deploy: 'npm run build && npm run push',
     };

@@ -21,7 +21,7 @@ describe('generatePackageJson', () => {
       });
       const parsed = JSON.parse(content);
 
-      expect(parsed.scripts.build).toBe('tsc && cpy src/appsscript.json dist');
+      expect(parsed.scripts.build).toBe('tsc && cpy src/appsscript.json dist --flat');
     });
 
     it('should include TypeScript devDependencies', () => {
@@ -76,7 +76,7 @@ describe('generatePackageJson', () => {
       });
       const parsed = JSON.parse(content);
 
-      expect(parsed.scripts.build).toBe("cpy 'src/**/*' dist");
+      expect(parsed.scripts.build).toBe("cpy 'src/**/*' dist --flat");
     });
 
     it('should NOT include TypeScript devDependencies', () => {
