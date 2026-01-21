@@ -10,7 +10,6 @@ export function generateTsconfig(): string {
       skipLibCheck: true,
       forceConsistentCasingInFileNames: true,
       types: ['google-apps-script'],
-      resolveJsonModule: true,
     },
     include: ['src/**/*'],
   };
