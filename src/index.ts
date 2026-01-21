@@ -98,7 +98,13 @@ async function handleClaspSetup(config: ProjectConfig, projectPath: string): Pro
 async function main(): Promise<void> {
   setupSignalHandlers();
 
-  const { projectName: argProjectName, options } = parseArgs(process.argv);
+  const { result, shouldExit } = parseArgs(process.argv);
+
+  if (shouldExit) {
+    process.exit(0);
+  }
+
+  const { projectName: argProjectName, options } = result!;
 
   let config: ProjectConfig;
 
