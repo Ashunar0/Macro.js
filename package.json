@@ -1,6 +1,6 @@
 {
   "name": "create-macro",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Create GAS projects with clasp in one command",
   "type": "module",
   "bin": {
