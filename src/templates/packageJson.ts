@@ -33,7 +33,7 @@ export function generatePackageJson(options: PackageJsonOptions): string {
     baseConfig.scripts = {
       build: 'tsc && cpy src/appsscript.json dist --flat',
       ...baseConfig.scripts,
-      deploy: 'npm run build && npm run push',
+      push: 'tsc && cpy src/appsscript.json dist --flat && node scripts/push.js',
     };
     baseConfig.devDependencies = {
       ...baseConfig.devDependencies,
@@ -44,7 +44,7 @@ export function generatePackageJson(options: PackageJsonOptions): string {
     baseConfig.scripts = {
       build: "cpy 'src/**/*' dist --flat",
       ...baseConfig.scripts,
-      deploy: 'npm run build && npm run push',
+      push: "cpy 'src/**/*' dist --flat && node scripts/push.js",
     };
   }
 
